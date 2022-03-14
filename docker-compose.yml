@@ -1,10 +1,11 @@
 version: '3'
 services:
   apcupsd-influxdb-exporter:
-    image: bgulla/apcupsd-influxdb-exporter
+    image: napalmzrpi/apcupsd-influxdb-exporter
     container_name: apcupsd-influxdb-exporter
     restart: always
     environment:
+      TZ: Europe/Rome
       WATTS: 1500 # if your ups doesn't have NOMPOWER, set this to be the rated max power, if you do have NOMPOWER, don't set this variable
       APCUPSD_HOST: localhost # host running apcupsd
       INFLUXDB_HOST: localhost # host running influxdb
