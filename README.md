@@ -45,7 +45,7 @@ docker run --rm  -d --name="apcupsd-influxdb-exporter" \
     -e "HOSTNAME=unraid" \
     -e "INFLUXDB_HOST=10.0.1.11" \
     -e "APCUPSD_HOST=10.0.1.11" \
-    -t bgulla/apcupsd-influxdb-exporter
+    -t napalmzrpi/apcupsd-influxdb-exporter
 ```
 Note: if your UPS does not include the NOMPOWER metric, you will need to include the WATTS environment variable in order to compute the live-power consumption 
 metric.
@@ -55,10 +55,11 @@ metric.
 version: '3'
 services:
   apcupsd-influxdb-exporter:
-    image: bgulla/apcupsd-influxdb-exporter
+    image: napalmzrpi/apcupsd-influxdb-exporter
     container_name: apcupsd-influxdb-exporter
     restart: always
     environment:
+      TZ: Europe/Rome
       WATTS: 1500
       APCUPSD_HOST: 10.0.1.11
       INFLUXDB_HOST: 10.0.1.11
@@ -107,7 +108,7 @@ spec:
           value: addl_servers
         - name: VERBOSE
           value: "true"
-        image: bgulla/apcupsd-influxdb-exporter
+        image: napalmzrpi/apcupsd-influxdb-exporter
         imagePullPolicy: Always
         name: apcupsd-influx-exporter
       dnsPolicy: ClusterFirst
