@@ -1,16 +1,27 @@
 version: '3'
 services:
   apcupsd-influxdb-exporter:
-    image: napalmzrpi/apcupsd-influxdb-exporter
+    image: napalmzrpi/apcupsd-influxdb-exporter:latest
     container_name: apcupsd-influxdb-exporter
     restart: always
     environment:
       TZ: Europe/Rome
-      WATTS: 1500 # if your ups doesn't have NOMPOWER, set this to be the rated max power, if you do have NOMPOWER, don't set this variable
-      APCUPSD_HOST: localhost # host running apcupsd
-      INFLUXDB_HOST: localhost # host running influxdb
       HOSTNAME: unraid # host you want to show up in influxdb, optional defaults to apcupsd-influxdb-exporter
-      INFLUXDB_DATABASE: apcupsd # db name for influxdb. optional, defaults to apcupsd
-      INFLUXDB_USER: # optional, defaults to empty
-      INFLUXDB_PASSWORD: # optional, defaults to empty
-      INFLUXDB_PORT: 8086 # optional, defaults to 8086
+      WATTS: 1500 # if your ups doesn't have NOMPOWER, set this to be the rated max power, if you do have NOMPOWER, don't set this variable
+      APCUPSD_HOST: localhost # host running apcupsd, optional, defaults to localhost
+      UPS_ALIAS: SmartUPS750 # optional, defaults to none
+      VERBOSE: "false" # optional, defaults to false
+      # Influxdb version choose
+      INFLUXDB_VERSION: 2
+      # Influxdb v1
+      INFLUXDB1_HOST: localhost # host running influxdb
+      INFLUXDB1_PORT: 8086 # optional, defaults to 8086
+      INFLUXDB1_USER: username # optional, defaults to empty
+      INFLUXDB1_PASSWORD: password # optional, defaults to empty
+      INFLUXDB1_DATABASE: apcupsd # db name for influxdb. optional, defaults to apcupsd
+      # Influxdb v2
+      INFLUXDB2_URL: http://localhost:8086
+      INFLUXDB2_TOKEN: my-token
+      INFLUXDB2_ORG: my-org
+      INFLUXDB2_BUCKET: my-bucket
+
