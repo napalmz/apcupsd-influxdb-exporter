@@ -8,7 +8,7 @@ ENV TZ=Europe/Rome
 RUN apk --no-cache update \
     && apk --no-cache upgrade \
     && apk add --no-cache \
-        tzdata
+        tzdata gcc g++
 
 COPY ./apcupsd-influxdb-exporter.py /apcupsd-influxdb-exporter.py
 RUN pip install apcaccess influxdb influxdb-client
